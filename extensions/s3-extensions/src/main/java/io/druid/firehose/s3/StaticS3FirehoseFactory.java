@@ -114,9 +114,10 @@ public class StaticS3FirehoseFactory implements FirehoseFactory<StringInputRowPa
               )
                                                            .getDataInputStream();
 
-              final InputStream outerInputStream = s3Object.getKey().endsWith(".gz")
-                                                   ? CompressionUtils.gzipInputStream(innerInputStream)
-                                                   : innerInputStream;
+//              final InputStream outerInputStream = s3Object.getKey().endsWith(".gz")
+//                                                   ? CompressionUtils.gzipInputStream(innerInputStream)
+//                                                   : innerInputStream;
+              final InputStream outerInputStream = CompressionUtils.gzipInputStream(innerInputStream);
 
               return IOUtils.lineIterator(
                   new BufferedReader(
